@@ -30,8 +30,8 @@ fg.src = "img/floor.png";
 p1.src = "img/pipeUp.png";
 p2.src = "img/pipeBottom.png";
 sprite.src = "img/sprite.png ";
-getReady.src = "imgBird/getReady.png";
-gameOver.src = "imgBird/gameOver.png";
+getReady.src = "imgBird/getready.png";
+gameOver.src = "imgBird/gameover.png";
 scoreMedal.src = "imgBird/scoreboard.png";
 restart.src = "img/restart.png";
 
