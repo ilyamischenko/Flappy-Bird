@@ -20,24 +20,24 @@ let birdUp = new Image();
 let birdDown = new Image();
 let birdMid = new Image();
 
-medalOne.src = "/imgBird/medal_1.png";
-medalTo.src = "/imgBird/medal_2.png";
-medalThree.src = "/imgBird/medal_3.png";
-medalFo.src = "/imgBird/medal_4.png";
+medalOne.src = "imgBird/medal_1.png";
+medalTo.src = "imgBird/medal_2.png";
+medalThree.src = "imgBird/medal_3.png";
+medalFo.src = "imgBird/medal_4.png";
 bird.src = "imgBird/bluebird-midflap.png";
 bg.src = "img/background.png";
 fg.src = "img/floor.png";
 p1.src = "img/pipeUp.png";
 p2.src = "img/pipeBottom.png";
 sprite.src = "img/sprite.png ";
-getReady.src = "/imgBird/getReady.png";
-gameOver.src = "/imgBird/gameOver.png";
-scoreMedal.src = "/imgBird/scoreboard.png";
-restart.src = "/img/restart.png";
+getReady.src = "imgBird/getReady.png";
+gameOver.src = "imgBird/gameOver.png";
+scoreMedal.src = "imgBird/scoreboard.png";
+restart.src = "img/restart.png";
 
-birdUp.src = "/imgBird/bluebird-upflap.png";
+birdUp.src = "imgBird/bluebird-upflap.png";
 birdDown.src = "imgBird/bluebird-downflap.png";
-birdMid.src = "/imgBird/bluebird-midflap.png";
+birdMid.src = "imgBird/bluebird-midflap.png";
 
 let gameRestart = false;
 let isGameActive = true;
@@ -58,7 +58,7 @@ let score_sound = new Audio();
 fly_sound.src = "audio/fly.mp3";
 score_sound.src = "audio/score.mp3";
 
-bird.src = "/imgBird/bluebird-upflap.png";
+bird.src = "imgBird/bluebird-upflap.png";
 birdY -= 30;
 fly_sound.play();
 
@@ -85,7 +85,7 @@ const setBirdDirectionUp = () => {
 const setBirdDirectionDownDebounce = debounce(() => setBirdDirectionDown());
 
 function moveUp() {
-  bird.src = "/imgBird/bluebird-upflap.png";
+  bird.src = "imgBird/bluebird-upflap.png";
   setBirdDirectionUp();
   setBirdDirectionDownDebounce();
   fly_sound.play();
@@ -149,10 +149,11 @@ function draw() {
 
       cvs.addEventListener("click", gameRestart);
 
-      if (score < 1) {
+      if (score < 2) {
+        cxt.drawImage(medalOne, 55, 148);
+      } else if (score < 3) {
         cxt.drawImage(medalThree, 55, 148);
-      } else {
-        score < 2;
+      } else if (score < 4) {
         cxt.drawImage(medalFo, 55, 148);
       }
     }
@@ -197,7 +198,7 @@ function mockGame() {
     requestAnimationFrame(mockGame);
 
     document.addEventListener("click", draw);
-    // document.addEventListener("keydown", draw);
+    document.addEventListener("keydown", draw);
   }
 }
 
