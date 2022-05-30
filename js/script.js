@@ -143,12 +143,15 @@ function draw() {
 
       cxt.fillText(localStorage.getItem(localStorageKey), 210, 200);
 
-      function gameRestart() {
+      function gameRestartClik() {
+        location.reload();
+      }
+      function gameRestartKeyDown() {
         location.reload();
       }
 
-      cvs.addEventListener("click", gameRestart);
-      cvs.addEventListener("keydown", gameRestart);
+      cvs.addEventListener("click", gameRestartClik);
+      document.addEventListener("keydown", gameRestartKeyDown);
 
       if (score < 3) {
         cxt.drawImage(medalOne, 55, 148);
