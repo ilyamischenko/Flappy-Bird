@@ -150,12 +150,14 @@ function draw() {
       cvs.addEventListener("click", gameRestart);
       cvs.addEventListener("keydown", gameRestart);
 
-      if (score < 2) {
+      if (score < 3) {
         cxt.drawImage(medalOne, 55, 148);
-      } else if (score < 3) {
+      } else if (score < 5) {
+        cxt.drawImage(medalTo, 55, 148);
+      } else if (score < 7) {
         cxt.drawImage(medalThree, 55, 148);
-      } else if (score < 4) {
-        cxt.drawImage(medalFo, 55, 148);
+      } else if (score < 20) {
+        cxt.drawImage(medalThree, 55, 148);
       }
     }
 
