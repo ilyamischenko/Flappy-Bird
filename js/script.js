@@ -199,8 +199,6 @@ function mockGame() {
     cxt.fillStyle = "f0f8ff";
     cxt.font = "30px Anton ";
 
-    // cxt.fillText("Score :" + score, 100, 380);
-
     requestAnimationFrame(mockGame);
 
     document.addEventListener("click", draw);
