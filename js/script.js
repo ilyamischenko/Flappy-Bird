@@ -239,7 +239,7 @@ function draw() {
 
     pipe[i].x--;
 
-    if (pipe[i].x == 700) {
+    if (pipe[i].x == 900) {
       pipe.push({
         x: cvs.width,
         y: Math.floor(Math.random() * p1.height) - p1.height,
@@ -282,11 +282,11 @@ function draw() {
       if (score < 3) {
         cxt.drawImage(medalOne, 486, 343);
       } else if (score < 5) {
-        cxt.drawImage(medalTo, 55, 148);
+        cxt.drawImage(medalTo, 486, 343);
       } else if (score < 7) {
-        cxt.drawImage(medalThree, 55, 148);
+        cxt.drawImage(medalThree, 486, 343);
       } else if (score < 20) {
-        cxt.drawImage(medalThree, 55, 148);
+        cxt.drawImage(medalThree, 486, 343);
       }
     }
 
