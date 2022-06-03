@@ -100,128 +100,128 @@ pipe[0] = {
   y: 0,
 };
 
-// function tAJAXStorage(lsKeyName) {
-//   var self = this;
+function tAJAXStorage(lsKeyName) {
+  var self = this;
 
-//   const item = localStorage.getItem(lsKeyName);
+  const item = localStorage.getItem(lsKeyName);
 
-//   self.hashStorage = {};
-//   // ----------------------------------------------------------------------------------------------------------------------------------------------------
-//   $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
-//     type: "POST",
-//     cache: false,
-//     dataType: "json",
-//     data: { f: "READ", n: "Ilya_Mishenko_Test_project" },
-//     success: DataLoadedRead,
-//     error: ErrorHandler,
-//   });
+  self.hashStorage = {};
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+    type: "POST",
+    cache: false,
+    dataType: "json",
+    data: { f: "READ", n: "Ilya_Mishenko_Test_project" },
+    success: DataLoadedRead,
+    error: ErrorHandler,
+  });
 
-//   function DataLoadedRead(data) {
-//     if (data !== " ") {
-//       self.hashStorage = data.result;
-//       // ------------------------------------------------------------------
-//       console.log("DataLoadedRead - " + data.result);
-//       // ------------------------------------------------------------------
-//     } else if (data === " ") {
-//       $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
-//         type: "POST",
-//         cache: false,
-//         dataType: "json",
-//         data: {
-//           f: "INSERT",
-//           n: "Ilya_Mishenko_Test_project",
-//           v: JSON.stringify(self.hashStorage),
-//         },
-//         success: DataLoadedInsert,
-//         error: ErrorHandler,
-//       });
+  function DataLoadedRead(data) {
+    if (data !== " ") {
+      self.hashStorage = data.result;
+      // ------------------------------------------------------------------
+      console.log("DataLoadedRead - " + data.result);
+      // ------------------------------------------------------------------
+    } else if (data === " ") {
+      $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+        type: "POST",
+        cache: false,
+        dataType: "json",
+        data: {
+          f: "INSERT",
+          n: "Ilya_Mishenko_Test_project",
+          v: JSON.stringify(self.hashStorage),
+        },
+        success: DataLoadedInsert,
+        error: ErrorHandler,
+      });
 
-//       function DataLoadedInsert(data) {
-//         // ------------------------------------------------------------------
-//         console.log("DataLoadedInsert - " + data.result);
-//         // ------------------------------------------------------------------
-//       }
-//     }
-//   }
-//   // ----------------------------------------------------------------------------------------------------------------------------------------------------
-//   self.addValue = function (key, value) {
-//     self.hashStorage[key] = value;
-//     // ------------------------------------
-//     addValueOnTheServer(self.hashStorage);
-//     // ------------------------------------
-//   };
+      function DataLoadedInsert(data) {
+        // ------------------------------------------------------------------
+        console.log("DataLoadedInsert - " + data.result);
+        // ------------------------------------------------------------------
+      }
+    }
+  }
+  // ----------------------------------------------------------------------------------------------------------------------------------------------------
+  self.addValue = function (key, value) {
+    self.hashStorage[key] = value;
+    // ------------------------------------
+    addValueOnTheServer(self.hashStorage);
+    // ------------------------------------
+  };
 
-//   self.getValue = function (key) {
-//     if (key in self.hashStorage) {
-//       return self.hashStorage[key];
-//     } else {
-//       return undefined;
-//     }
-//   };
+  self.getValue = function (key) {
+    if (key in self.hashStorage) {
+      return self.hashStorage[key];
+    } else {
+      return undefined;
+    }
+  };
 
-//   self.deleteValue = function (key) {
-//     if (key in self.hashStorage) {
-//       delete self.hashStorage[key];
-//       // ------------------------------------
-//       addValueOnTheServer(self.hashStorage);
-//       // ------------------------------------
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   };
+  self.deleteValue = function (key) {
+    if (key in self.hashStorage) {
+      delete self.hashStorage[key];
+      // ------------------------------------
+      addValueOnTheServer(self.hashStorage);
+      // ------------------------------------
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-//   self.getKeys = function () {
-//     var keys = [];
-//     for (var key in self.hashStorage) {
-//       keys.push(" " + key);
-//     }
+  self.getKeys = function () {
+    var keys = [];
+    for (var key in self.hashStorage) {
+      keys.push(" " + key);
+    }
 
-//     return keys;
-//   };
+    return keys;
+  };
 
-//   function addValueOnTheServer(hash) {
-//     $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
-//       type: "POST",
-//       cache: false,
-//       dataType: "json",
-//       data: { f: "LOCKGET", n: "Arniyazov_Atabay_Test_project", p: item },
-//       success: DataLoadedLockget,
-//       error: ErrorHandler,
-//     });
+  function addValueOnTheServer(hash) {
+    $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+      type: "POST",
+      cache: false,
+      dataType: "json",
+      data: { f: "LOCKGET", n: "Arniyazov_Atabay_Test_project", p: item },
+      success: DataLoadedLockget,
+      error: ErrorHandler,
+    });
 
-//     function DataLoadedLockget(data) {
-//       // ------------------------------------------------------------------
-//       console.log("DataLoadedLockget - " + data.result);
-//       // ------------------------------------------------------------------
+    function DataLoadedLockget(data) {
+      // ------------------------------------------------------------------
+      console.log("DataLoadedLockget - " + data.result);
+      // ------------------------------------------------------------------
 
-//       $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
-//         type: "POST",
-//         cache: false,
-//         dataType: "json",
-//         data: {
-//           f: "UPDATE",
-//           n: "Arniyazov_Atabay_Test_project",
-//           p: item,
-//           v: JSON.stringify(hash),
-//         },
-//         success: DataLoadedUpdate,
-//         error: ErrorHandler,
-//       });
+      $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+        type: "POST",
+        cache: false,
+        dataType: "json",
+        data: {
+          f: "UPDATE",
+          n: "Arniyazov_Atabay_Test_project",
+          p: item,
+          v: JSON.stringify(hash),
+        },
+        success: DataLoadedUpdate,
+        error: ErrorHandler,
+      });
 
-//       function DataLoadedUpdate(data) {
-//         // ------------------------------------------------------------------
-//         console.log("DataLoadedUpdate - " + data.result);
-//         // ------------------------------------------------------------------
-//       }
-//     }
-//   }
+      function DataLoadedUpdate(data) {
+        // ------------------------------------------------------------------
+        console.log("DataLoadedUpdate - " + data.result);
+        // ------------------------------------------------------------------
+      }
+    }
+  }
 
-//   function ErrorHandler(jqXHR, StatusStr, ErrorStr) {
-//     alert(StatusStr + " " + ErrorStr);
-//   }
-//   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// }
+  function ErrorHandler(jqXHR, StatusStr, ErrorStr) {
+    alert(StatusStr + " " + ErrorStr);
+  }
+  // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+}
 
 function draw() {
   isGameStarted = true;
