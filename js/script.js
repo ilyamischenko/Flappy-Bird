@@ -27,7 +27,6 @@ medalTo.src = "imgBird/medal_2.png";
 medalThree.src = "imgBird/medal_3.png";
 medalFo.src = "imgBird/medal_4.png";
 bird.src = "imgBird/bluebird-midflap.png";
-bg.src = "img/background.png";
 fg.src = "img/floor.png";
 p1.src = "img/pipeUp.png";
 p2.src = "img/pipeBottom.png";
@@ -62,7 +61,7 @@ score_sound.src = "audio/score.mp3";
 
 bird.src = "imgBird/bluebird-upflap.png";
 birdY -= 30;
-fly_sound.play();
+// fly_sound.play();
 
 let birdDirection = "down";
 
