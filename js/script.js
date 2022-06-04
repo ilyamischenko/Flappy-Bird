@@ -301,7 +301,7 @@ function draw() {
   }
 
   cxt.drawImage(fg, 0, cvs.height - fg.height);
-  cxt.drawImage(bird, 540, birdY);
+  cxt.drawImage(bird, birdX, birdY);
   if (birdDirection === "down") {
     birdY += gravity;
     bird.src = "imgBird/bluebird-downflap.png";
@@ -323,7 +323,7 @@ function mockGame() {
   if (!isGameStarted) {
     cxt.drawImage(bigFone, 0, 0);
     cxt.drawImage(fg, 0, cvs.height - fg.height);
-    const birdImage = cxt.drawImage(bird, 540, birdY);
+    const birdImage = cxt.drawImage(bird, birdX, birdY);
     cxt.drawImage(getReady, 470, 200);
 
     cxt.fillStyle = "f0f8ff";
