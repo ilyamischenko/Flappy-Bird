@@ -105,7 +105,7 @@ function tAJAXStorage() {
 
   self.hashStorage = {};
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
-  $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+  $.ajax("https://fe.it-academy.by/AjaxStringStorage2.php", {
     type: "POST",
     cache: false,
     dataType: "json",
@@ -121,7 +121,7 @@ function tAJAXStorage() {
       console.log("DataLoadedRead - " + data.result);
       // ------------------------------------------------------------------
     } else if (data === " ") {
-      $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+      $.ajax("https://fe.it-academy.by/AjaxStringStorage2.php", {
         type: "POST",
         cache: false,
         dataType: "json",
@@ -182,7 +182,7 @@ function tAJAXStorage() {
   function addValueOnTheServer(hash) {
     const password = Math.random();
 
-    $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+    $.ajax("https://fe.it-academy.by/AjaxStringStorage2.php", {
       type: "POST",
       cache: false,
       dataType: "json",
@@ -196,7 +196,7 @@ function tAJAXStorage() {
       console.log("DataLoadedLockget - " + data.result);
       // ------------------------------------------------------------------
 
-      $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
+      $.ajax("https://fe.it-academy.by/AjaxStringStorage2.php", {
         type: "POST",
         cache: false,
         dataType: "json",
