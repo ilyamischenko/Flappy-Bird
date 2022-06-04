@@ -27,9 +27,10 @@ medalTo.src = "imgBird/medal_2.png";
 medalThree.src = "imgBird/medal_3.png";
 medalFo.src = "imgBird/medal_4.png";
 bird.src = "imgBird/bluebird-midflap.png";
+bg.src = "img/background.png";
 fg.src = "img/floor.png";
 p1.src = "img/pipeUp.png";
-p2.src = "img/pipeBottom.png";
+p2.src = "img/pipeBottom2.png";
 sprite.src = "img/sprite.png ";
 getReady.src = "imgBird/getready.png";
 gameOver.src = "imgBird/gameover.png";
@@ -51,7 +52,7 @@ let gravity = 1.5;
 
 let gravityY = 30;
 let score = 0;
-const localStorageKey = "bestResult";
+const ajaxStorageKey = "bestResult";
 
 let fly_sound = new Audio();
 let score_sound = new Audio();
@@ -61,7 +62,7 @@ score_sound.src = "audio/score.mp3";
 
 bird.src = "imgBird/bluebird-upflap.png";
 birdY -= 30;
-// fly_sound.play();
+fly_sound.play();
 
 let birdDirection = "down";
 
@@ -99,10 +100,8 @@ pipe[0] = {
   y: 0,
 };
 
-function tAJAXStorage(lsKeyName) {
+function tAJAXStorage() {
   var self = this;
-
-  const item = localStorage.getItem(lsKeyName);
 
   self.hashStorage = {};
   // ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,14 +109,14 @@ function tAJAXStorage(lsKeyName) {
     type: "POST",
     cache: false,
     dataType: "json",
-    data: { f: "READ", n: "Ilya_Mishenko_Test_project" },
+    data: { f: "READ", n: "Ilya_Mishenko_Test_project2" },
     success: DataLoadedRead,
     error: ErrorHandler,
   });
 
   function DataLoadedRead(data) {
     if (data !== " ") {
-      self.hashStorage = data.result;
+      self.hashStorage = JSON.parse(data.result);
       // ------------------------------------------------------------------
       console.log("DataLoadedRead - " + data.result);
       // ------------------------------------------------------------------
@@ -128,7 +127,7 @@ function tAJAXStorage(lsKeyName) {
         dataType: "json",
         data: {
           f: "INSERT",
-          n: "Ilya_Mishenko_Test_project",
+          n: "Ilya_Mishenko_Test_project2",
           v: JSON.stringify(self.hashStorage),
         },
         success: DataLoadedInsert,
@@ -178,13 +177,16 @@ function tAJAXStorage(lsKeyName) {
 
     return keys;
   };
-
+  // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // функция которая будет сохранять на сервер изменённый хэш
   function addValueOnTheServer(hash) {
+    const password = Math.random();
+
     $.ajax("http://fe.it-academy.by/AjaxStringStorage2.php", {
       type: "POST",
       cache: false,
       dataType: "json",
-      data: { f: "LOCKGET", n: "Arniyazov_Atabay_Test_project", p: item },
+      data: { f: "LOCKGET", n: "Ilya_Mishenko_Test_project2", p: password },
       success: DataLoadedLockget,
       error: ErrorHandler,
     });
@@ -200,8 +202,8 @@ function tAJAXStorage(lsKeyName) {
         dataType: "json",
         data: {
           f: "UPDATE",
-          n: "Arniyazov_Atabay_Test_project",
-          p: item,
+          n: "Ilya_Mishenko_Test_project2",
+          p: password,
           v: JSON.stringify(hash),
         },
         success: DataLoadedUpdate,
@@ -219,8 +221,11 @@ function tAJAXStorage(lsKeyName) {
   function ErrorHandler(jqXHR, StatusStr, ErrorStr) {
     alert(StatusStr + " " + ErrorStr);
   }
+
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
+
+const scoreStorage = new tAJAXStorage();
 
 function draw() {
   isGameStarted = true;
@@ -259,15 +264,14 @@ function draw() {
       cxt.drawImage(scoreMedal, 460, 300);
       cxt.fillText(score, 635, 353);
 
-      let storage = localStorage.getItem(localStorageKey);
+      const dataFromServer = scoreStorage.getValue(ajaxStorageKey);
 
-      if (storage == undefined || score > parseInt(storage)) {
-        localStorage.setItem(localStorageKey, score);
+      if (dataFromServer == undefined || score > dataFromServer) {
+        scoreStorage.addValue(ajaxStorageKey, score);
+        cxt.fillText(score, 635, 353);
+      } else {
+        cxt.fillText(dataFromServer, 635, 395);
       }
-
-      cxt.fillText(localStorage.getItem(localStorageKey), 630, 395);
-
-      // tAJAXStorage(localStorageKey);
 
       function gameRestartClik() {
         location.reload();
@@ -297,7 +301,7 @@ function draw() {
   }
 
   cxt.drawImage(fg, 0, cvs.height - fg.height);
-  cxt.drawImage(bird, birdX, birdY);
+  cxt.drawImage(bird, 540, birdY);
   if (birdDirection === "down") {
     birdY += gravity;
     bird.src = "imgBird/bluebird-downflap.png";
@@ -306,7 +310,7 @@ function draw() {
   }
 
   cxt.fillStyle = "#f0f8ff";
-  cxt.font = "30px Anton ";
+  cxt.font = "25px Anton ";
 
   cxt.fillText(score, 580, 80);
 
@@ -319,7 +323,7 @@ function mockGame() {
   if (!isGameStarted) {
     cxt.drawImage(bigFone, 0, 0);
     cxt.drawImage(fg, 0, cvs.height - fg.height);
-    const birdImage = cxt.drawImage(bird, birdX, birdY);
+    const birdImage = cxt.drawImage(bird, 540, birdY);
     cxt.drawImage(getReady, 470, 200);
 
     cxt.fillStyle = "f0f8ff";
